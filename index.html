@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ULB Accounts Assessment</title>
+<style>
+:root{--bg:#f5f6f3;--fg:#1d2420;--mu:#5d675f;--card:#fff;--ln:#d6dbd3;--ac:#1f5f4a;--R:#b83a2e;--O:#d9811a;--G:#2e8b57}
+@media(prefers-color-scheme:dark){:root{--bg:#141815;--fg:#e6ebe6;--mu:#98a39a;--card:#1d231f;--ln:#333c35;--ac:#5fc4a0}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 Georgia,'Times New Roman',serif}
+header{background:var(--ac);color:#fff;padding:12px 14px;position:sticky;top:0;z-index:5}
+@media(prefers-color-scheme:dark){header{color:#0d1a14}}
+h1{font-size:17px;margin:0 0 8px}nav{display:flex;gap:6px;overflow-x:auto}
+button,select,input,textarea{font:inherit;color:inherit}
+nav button{background:transparent;border:1px solid currentColor;color:inherit;border-radius:4px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+nav button.on{background:#fff;color:var(--ac)}
+main{max-width:900px;margin:0 auto;padding:14px}
+.card,.it{background:var(--card);border:1px solid var(--ln);border-radius:6px;padding:12px;margin:10px 0}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:4px;padding:7px 12px;cursor:pointer;margin:2px 4px 2px 0}
+@media(prefers-color-scheme:dark){.btn{color:#0d1a14}}
+.btn.g{background:transparent;color:var(--fg);border:1px solid var(--ln)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.k{border-left:5px solid var(--ln);background:var(--card);padding:8px 10px;border-radius:4px}.k b{font-size:26px;display:block}
+.Red{border-color:var(--R)}.Orange{border-color:var(--O)}.Green{border-color:var(--G)}
+.tag{color:#fff;border-radius:3px;padding:1px 8px;font-size:13px}.tag.Red{background:var(--R)}.tag.Orange{background:var(--O)}.tag.Green{background:var(--G)}
+.bar{height:10px;background:var(--ln);border-radius:5px;overflow:hidden;margin:2px 0 8px}.bar i{display:block;height:100%;background:var(--ac)}
+label.f{display:block;font-size:13px;color:var(--mu)}
+input,select,textarea{width:100%;background:var(--bg);border:1px solid var(--ln);border-radius:4px;padding:6px}
+textarea{min-height:44px;margin-top:6px}
+.ck{display:flex;gap:8px;align-items:flex-start;padding:3px 0}.ck input{width:auto;margin-top:5px}
+small{color:var(--mu)}details>summary{cursor:pointer;font-weight:bold;padding:8px 0}
+.live{position:sticky;top:78px;z-index:4;background:var(--card);border:1px solid var(--ln);padding:6px 10px;border-radius:6px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{border:1px solid var(--ln);padding:4px 6px;text-align:left}
+.tw{overflow-x:auto}.rp{background:#fff;color:#000;padding:16px;border:1px solid var(--ln)}.rp h2{font-size:17px;border-bottom:1px solid #999}.rp h3{font-size:15px}.rp td,.rp th{border-color:#999}
+@media print{header,.np{display:none!important}body{background:#fff}main{padding:0;max-width:none}.rp{border:0;padding:0}}
+</style></head><body>
+<header><h1>ULB Audited Financial Statements: Assessment Tool</h1><nav id="nav"></nav></header>
+<main id="m"></main>
+<script>
+const PN=[["Mandate and Adoption of NMAM Manual",7],["Core Accounting System & Principles",25],["Financial Documentation and Procedures",15],["Fund, Grant, and Asset Management",12],["Internal Controls and Reporting",15],["Governance",11],["Quality of Audit",15]];
+const RAW=`1.1|Adaptation of NMAM|2|NMAM or aligned State manual adopted by ULB;Formats and codification aligned with NMAM
+1.2|Guidelines for accrual financial statements|2|State guidelines/manual issued for accrual FS;Guidelines followed uniformly
+1.3|Mandate: audit manuals with DLFA/ELFA|3|Manuals/guidelines present with DLFA/ELFA/similar authority;Adequate for certification audit
+2.1|Classification|3|Assets, liabilities, income, expenses correctly classified;Party-wise grouping maintained
+2.2|Significant accounting policy|3|Policies followed consistently year on year;Deviations disclosed with reason and impact
+2.3|Notes to accounts|1|Major transactions explained in each schedule;Schedules complete
+2.4|Format of accounts|2|Prescribed formats followed for all statements
+2.5|Accounting concepts|3|Going concern, accrual, cost, consistency followed;Materiality and full disclosure observed
+2.6|Accounting basis|1|Accrual and double entry applied uniformly for all funds
+2.7|Revenue accrual|1|Property tax, water charges recognised when due, not on receipt
+2.8|Assigned revenue|1|Assigned revenue accounted fully and on time
+2.9|Capitalisation policy|1|Assets above Rs 5,000 capitalised, below expensed;CWIP capitalised on completion
+2.10|Depreciation|1|Rates per manual and consistent;Computation correct for all asset classes
+2.11|Statutory and other liabilities|1|TDS, GST, PF, cess recognised in same period;Remitted and filed periodically;Retirement benefit provisions kept
+2.12|Disclosures|1|Adequate disclosures in accounts
+2.13|Related transactions|1|Employee/trust transactions accounted;Related party disclosures made
+2.14|Contingent liabilities|1|Court cases, claims, guarantees disclosed in notes
+2.15|Cash balances|1|FDRs and bank balances physically verified periodically;Agreed with year-end bank confirmation
+2.16|Cash flow|1|Cash flow statement prepared in prescribed format
+2.17|Stores|1|Stores valued per standards;Closing stock shown in current assets
+2.18|Accounting standards|1|ICAI accounting standards findings reported and analysed
+3.1|Primary books of account|4|Cash, Journal, Ledger maintained;Closed daily/monthly;Reconciled
+3.2|Voucher usage|3|Prescribed vouchers used consistently
+3.3|Period-end accruals|4|Outstanding liabilities accounted by cut-off date
+3.4|Opening adjustments|4|Opening balances tally with previous year closing
+4.1|Fund segregation|2|Designated bank accounts maintained;Used exclusively for grants, special funds, loans
+4.2|Grant accounting (advance)|3|Advance specific grants credited to grant liability;General grants treated correctly;Unspent grants of completed schemes surrendered
+4.3|Special funds|2|Interest on grants shown separately;Fund expenses accounted
+4.4|Mandatory provisioning|2|Doubtful receivables provided (e.g. tax over two years);Provision for loans and advances adequate
+4.5|Asset records and verification|3|Immovable and movable registers complete;Annual physical verification of assets and stores
+5.1|Budgetary control|3|Budget variance reports prepared periodically;No expenditure without budget provision and sanction
+5.2|Bank reconciliation|3|BRS prepared for every account periodically;Supported by bank advice
+5.3|Inter-departmental reconciliation|3|Quarterly statements certified by Head of Accounts;Reconciled for deposits, receivables, advances
+5.4|Internal control systems|3|Segregation of duties in place;Internal audit adequate and followed up;Controls over purchases, sales, contracts
+5.5|Financial statements|2|Timely preparation of statements;Required schedules prepared
+5.6|Cityfinance portal|1|All accounts uploaded separately and composite;Downloadable common formats
+6.1|Vacancy|4|Accounts cadre filled against sanctioned strength;Technically skilled staff available
+6.2|Software|4|Accounting software used with audit trail;Adequate and complete
+6.3|Monitoring|3|Action taken on auditor qualifications reviewed
+7.1|Quality of personnel|5|Qualified personnel with DLFA/ELFA/similar authority
+7.2|Vacancy|4|Staff for certification audit adequate
+7.3|Adequacy of audit manuals/guidelines|3|Manuals available;Manuals adequate for certification audit
+7.4|Certification audit|3|Primary auditor conducts certification audit, not only compliance audit`;
+const I=RAW.split("\n").map(l=>{const[a,b,c,d]=l.split("|");return{id:a,p:+a[0]-1,name:b,max:+c,ch:d.split(";")}});
+const LB=["Non-compliance","Partial compliance","Full compliance"];
+const $=s=>document.querySelector(s),m=$("#m");
+const esc=s=>String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let db=[];try{db=JSON.parse(localStorage.ulbdb||"[]")}catch(e){}
+const save=()=>{try{localStorage.ulbdb=JSON.stringify(db)}catch(e){alert("Storage unavailable: export your data.")}};
+const S=(a,id)=>a.s[id]||(a.s[id]={v:0,c:[],n:""});
+const sc=(a,i)=>{const v=(a.s[i.id]||{}).v||0;return v==2?i.max:v==1?i.max/2:0};
+const tot=a=>{const p=PN.map(()=>0);I.forEach(i=>p[i.p]+=sc(a,i));return{p,t:p.reduce((x,y)=>x+y,0)}};
+const cat=t=>t<35?["Red","Significant risk"]:t<60?["Orange","Moderate risk"]:["Green","Low risk"];
+let v="dash",curId=null,flt="",q="";
+const cur=()=>db.find(a=>a.id==curId);
+const tag=t=>{const c=cat(t)[0];return`<span class="tag ${c}">${c}</span>`};
+function go(x,id){v=x;if(id)curId=id;draw();scrollTo(0,0)}
+function draw(){
+ $("#nav").innerHTML=[["dash","Dashboard"],["form","Assessment"],["db","Database"],["rep","Report"]].map(([k,t])=>`<button class="${v==k?"on":""}" onclick="go('${k}')">${t}</button>`).join("");
+ m.innerHTML=V[v]();live()}
+function newA(){const a={id:Date.now().toString(36),name:"",type:"Municipal Corporation",state:"",fy:"",auditor:"",period:"",date:new Date().toISOString().slice(0,10),cert:"",s:{}};db.push(a);save();go("form",a.id)}
+const V={
+dash(){
+ const st=[...new Set(db.map(a=>a.state).filter(Boolean))],L=db.filter(a=>!flt||a.state==flt);
+ if(!db.length)return`<div class="card">No assessments yet. <button class="btn" onclick="newA()">Start first assessment</button></div>`;
+ const T=L.map(a=>({a,...tot(a)})),n=T.length||1,cn={Red:0,Orange:0,Green:0};T.forEach(x=>cn[cat(x.t)[0]]++);
+ const avg=PN.map((_,i)=>T.reduce((s,x)=>s+x.p[i],0)/n);
+ return`<div class="np"><label class="f">State filter<select onchange="flt=this.value;draw()"><option value="">All states</option>${st.map(s=>`<option ${s==flt?"selected":""}>${esc(s)}</option>`).join("")}</select></label></div>
+ <div class="grid" style="margin-top:10px"><div class="k"><b>${T.length}</b>ULBs assessed</div><div class="k"><b>${(T.reduce((s,x)=>s+x.t,0)/n).toFixed(1)}</b>Average score</div>
+ ${["Red","Orange","Green"].map(c=>`<div class="k ${c}"><b>${cn[c]}</b>${c}</div>`).join("")}</div>
+ <div class="card"><b>Average score by parameter</b>${PN.map((p,i)=>`<div style="margin-top:8px">${p[0]} <small>${avg[i].toFixed(1)} / ${p[1]}</small><div class="bar"><i style="width:${avg[i]/p[1]*100}%"></i></div></div>`).join("")}</div>
+ <div class="card tw"><b>ULBs by score</b><table><tr><th>ULB</th><th>FY</th><th>Score</th><th>Group</th></tr>${T.sort((x,y)=>x.t-y.t).map(x=>`<tr onclick="go('rep','${x.a.id}')" style="cursor:pointer"><td>${esc(x.a.name)||"(unnamed)"}</td><td>${esc(x.a.fy)}</td><td>${x.t}</td><td>${tag(x.t)}</td></tr>`).join("")}</table></div>`},
+form(){
+ const a=cur();if(!a)return`<div class="card">Choose an assessment from the Database, or <button class="btn" onclick="newA()">start a new one</button></div>`;
+ const F=(k,t,x="")=>`<label class="f">${t}<input data-f="${k}" value="${esc(a[k])}" ${x}></label>`;
+ return`<div class="card"><div class="grid">${F("name","Name of ULB")}<label class="f">Type<select data-f="type">${["Municipal Corporation","Municipal Council / Nagarpalika","Nagar Panchayat"].map(t=>`<option ${a.type==t?"selected":""}>${t}</option>`).join("")}</select></label>${F("state","State")}${F("fy","Financial year","placeholder='2023-24'")}${F("auditor","Auditor / office")}${F("period","Certification audit period")}${F("date","Review date","type=date")}</div></div>
+ <div class="live" id="live"></div>
+ ${PN.map((p,pi)=>`<details open><summary>${pi+1}. ${p[0]} <small>(<span id="ps${pi}"></span> marks)</small></summary>${I.filter(i=>i.p==pi).map(i=>{const s=S(a,i.id);return`<div class="it"><b>${i.id} ${i.name}</b><br><small>${i.max} marks · Framework Sl. ${i.id} · Report para 6.${i.id}</small>
+ ${i.ch.map((c,k)=>`<label class="ck"><input type="checkbox" data-i="${i.id}" data-k="${k}" ${s.c[k]?"checked":""}><span>${c}</span></label>`).join("")}
+ <label class="f">Rating<select data-r="${i.id}">${LB.map((l,k)=>`<option value="${k}" ${s.v==k?"selected":""}>${l} (${[0,i.max/2,i.max][k]})</option>`).join("")}</select></label>
+ <textarea data-n="${i.id}" placeholder="Observation, evidence, number of instances">${esc(s.n)}</textarea></div>`}).join("")}</details>`).join("")}
+ <div class="card"><label class="f">Part IV: Quality of certification (comment on audit opinion)<textarea data-f="cert">${esc(a.cert)}</textarea></label></div>
+ <button class="btn" onclick="go('rep')">Open report</button><button class="btn g" onclick="go('db')">Done</button>`},
+db(){
+ const L=db.filter(a=>(a.name+a.state+a.fy).toLowerCase().includes(q.toLowerCase()));
+ return`<div class="np"><button class="btn" onclick="newA()">New assessment</button><button class="btn g" onclick="xJ()">Export JSON</button><button class="btn g" onclick="xC()">Export CSV</button><button class="btn g" onclick="$('#imp').click()">Import JSON</button><input id="imp" type="file" accept=".json" hidden onchange="imp(this)">
+ <label class="f">Search<input value="${esc(q)}" oninput="q=this.value;clearTimeout(window.t);window.t=setTimeout(()=>{draw();$('#m input:not([type=file])').focus()},300)"></label></div>
+ <div class="card tw"><table><tr><th>ULB</th><th>State</th><th>FY</th><th>Score</th><th>Group</th><th></th></tr>${L.map(a=>{const t=tot(a).t;return`<tr><td>${esc(a.name)||"(unnamed)"}</td><td>${esc(a.state)}</td><td>${esc(a.fy)}</td><td>${t}</td><td>${tag(t)}</td><td style="white-space:nowrap"><button class="btn g" onclick="go('form','${a.id}')">Edit</button><button class="btn g" onclick="go('rep','${a.id}')">Report</button><button class="btn g" onclick="del('${a.id}')">Delete</button></td></tr>`}).join("")||"<tr><td colspan=6>No records</td></tr>"}</table></div><small>Data is stored in this browser. Export JSON to back up or share.</small>`},
+rep(){
+ const a=cur()||db[0];if(!a)return`<div class="card">No assessment to report on yet.</div>`;curId=a.id;
+ return`<div class="np"><label class="f">Assessment<select onchange="curId=this.value;draw()">${db.map(x=>`<option value="${x.id}" ${x.id==a.id?"selected":""}>${esc(x.name)||"(unnamed)"} ${esc(x.fy)}</option>`).join("")}</select></label>
+ <button class="btn" onclick="print()">Print / Save PDF</button><button class="btn g" onclick="dl('doc')">Download Word</button><button class="btn g" onclick="dl('html')">Download HTML</button></div><div class="rp" id="rp">${rep(a)}</div>`}};
+function rep(a){
+ const {p,t}=tot(a),c=cat(t),peers=db.filter(x=>x.state==a.state&&x.fy==a.fy),T=peers.map(x=>({x,...tot(x)}));
+ const avg=PN.map((_,i)=>T.reduce((s,y)=>s+y.p[i],0)/(T.length||1));
+ const tbl=h=>`<table>${h}</table>`;
+ return`<h2>Report on the assessment of Audited Financial Statements for FY ${esc(a.fy)} of ${esc(a.name)||"the ULB"}, ${esc(a.state)}, and quality of certification of accounts</h2>
+ <h3>Part I: Overview</h3><p>${esc(a.type)}: ${esc(a.name)}, ${esc(a.state)}. Review date ${esc(a.date)}${a.auditor?", by "+esc(a.auditor):""}${a.period?". Certification audit period: "+esc(a.period):""}.</p>
+ <p>This is not a certification audit of the accounts of the ULB. It is a review and analysis of the latest available audited financial statements to assess the quality of accounts preparation, scored against seven parameters weighing 100 marks (${I.length} areas).</p>
+ ${tbl(`<tr><th>Sl.</th><th>Parameter</th><th>Weight</th><th>Score</th></tr>${PN.map((q,i)=>`<tr><td>${i+1}</td><td>${q[0]}</td><td>${q[1]}</td><td>${p[i]}</td></tr>`).join("")}<tr><th></th><th>Total</th><th>100</th><th>${t}</th></tr>`)}
+ <h3>Part II: Audit findings</h3>${PN.map((q,pi)=>`<h3>6.${pi+1} ${q[0]}</h3>${I.filter(i=>i.p==pi).map(i=>{const s=S(a,i.id),miss=i.ch.filter((_,k)=>!s.c[k]);return`<p><b>6.${i.id} ${i.name}</b> (${sc(a,i)}/${i.max}): ${LB[s.v]}.${miss.length&&s.v<2?" Not met: "+miss.map(esc).join("; ")+".":""} ${esc(s.n)}</p>`}).join("")}`).join("")}
+ <h2>Part III: Outcome of assessment</h2><p>Composite score <b>${t}/100</b>. Risk group: <b>${c[0]}</b> (${c[1]}). ${c[0]=="Red"?"Needs urgent corrective and supervisory attention.":c[0]=="Orange"?"Focused improvements needed, with capacity building and stronger oversight.":"Routine monitoring; sustain existing controls."}</p>
+ <h2>Part IV: Quality of certification</h2><p>${esc(a.cert)||"No comment recorded."}</p>
+ <h2>Annexure IV: ULBs for ${esc(a.state)}, FY ${esc(a.fy)}</h2>${tbl(`<tr><th>Sl.</th><th>ULB</th><th>Score</th><th>Risk group</th></tr>${T.map((y,k)=>`<tr><td>${k+1}</td><td>${esc(y.x.name)}</td><td>${y.t}</td><td>${cat(y.t)[0]}</td></tr>`).join("")}`)}
+ <h2>Annexure V: Average score by parameter (${T.length} ULBs)</h2>${tbl(`<tr><th>Sl.</th><th>Parameter</th><th>Total</th><th>This ULB</th><th>Average</th></tr>${PN.map((q,i)=>`<tr><td>${i+1}</td><td>${q[0]}</td><td>${q[1]}</td><td>${p[i]}</td><td>${avg[i].toFixed(2)}</td></tr>`).join("")}`)}`}
+function dl(k){const h=`<html><head><meta charset="utf-8"><style>body{font:12pt Georgia}table{border-collapse:collapse}td,th{border:1px solid #999;padding:3px}</style></head><body>${$("#rp").innerHTML}</body></html>`;
+ file(h,(cur().name||"ULB")+"_report."+k,k=="doc"?"application/msword":"text/html")}
+function file(d,n,t){const u=URL.createObjectURL(new Blob([d],{type:t})),e=document.createElement("a");e.href=u;e.download=n;e.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+const xJ=()=>file(JSON.stringify(db,null,1),"ulb_assessments.json","application/json");
+function xC(){const r=[["ULB","Type","State","FY",...PN.map(p=>p[0]),"Total","Group"]];db.forEach(a=>{const x=tot(a);r.push([a.name,a.type,a.state,a.fy,...x.p,x.t,cat(x.t)[0]])});
+ file(r.map(l=>l.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(",")).join("\n"),"ulb_scores.csv","text/csv")}
+function imp(el){const f=el.files[0];if(!f)return;f.text().then(x=>{try{const n=JSON.parse(x);n.forEach(a=>{const k=db.findIndex(y=>y.id==a.id);k<0?db.push(a):db[k]=a});save();draw()}catch(e){alert("Invalid JSON file.")}})}
+function del(id){if(confirm("Delete this assessment?")){db=db.filter(a=>a.id!=id);save();draw()}}
+function live(){const a=cur(),e=$("#live");if(v!="form"||!a||!e)return;const x=tot(a);e.innerHTML=`Score <b>${x.t}</b>/100 ${tag(x.t)} ${cat(x.t)[1]}`;PN.forEach((q,i)=>{const s=$("#ps"+i);if(s)s.textContent=x.p[i]+" of "+q[1]})}
+m.addEventListener("input",e=>{const t=e.target,a=cur();if(v!="form"||!a)return;
+ if(t.dataset.f)a[t.dataset.f]=t.value;else if(t.dataset.n)S(a,t.dataset.n).n=t.value;save();live()});
+m.addEventListener("change",e=>{const t=e.target,a=cur();if(v!="form"||!a)return;
+ if(t.dataset.k!=null){const s=S(a,t.dataset.i),it=I.find(x=>x.id==t.dataset.i);s.c[t.dataset.k]=t.checked;const n=s.c.filter(Boolean).length;s.v=n==0?0:n==it.ch.length?2:1;$(`[data-r="${it.id}"]`).value=s.v}
+ else if(t.dataset.r)S(a,t.dataset.r).v=+t.value;save();live()});
+draw();
+</script></body></html>
