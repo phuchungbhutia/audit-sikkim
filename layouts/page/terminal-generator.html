@@ -1,0 +1,44 @@
+﻿{{ define "main" }}
+<link rel="stylesheet" href="{{ "css/terminal.css" | relURL }}">
+<script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+<div class="terminal-container">
+  <div class="terminal-chrome">
+    <div class="terminal-dots">
+      <span class="dot dot-red"></span>
+      <span class="dot dot-yellow"></span>
+      <span class="dot dot-green"></span>
+    </div>
+    <div class="terminal-title">audit-officer@sikkim-dlfa: ~/tgs-database-engine</div>
+    <div class="terminal-quick-actions">
+      <button onclick="termApp.triggerPrint()" class="term-btn">PRINT REPORT</button>
+      <button onclick="termApp.exportMarkdown()" class="term-btn">EXPORT MD</button>
+      <button onclick="termApp.exportDB()" class="term-btn">BACKUP DB</button>
+    </div>
+  </div>
+
+  <div class="terminal-screen" id="term-screen">
+    <pre class="term-banner">
+╔════════════════════════════════════════════════════════════════════════════╗
+║  SIKKIM LOCAL FUND AUDIT & CAG TGS — AUDIT REPORT TERMINAL & DATABASE     ║
+║  IndexedDB Persistent Storage | 7 Parameters | 42 Areas | CAG Assessment   ║
+╚════════════════════════════════════════════════════════════════════════════╝
+    </pre>
+    <div class="term-line text-dim">
+      Type <span class="text-amber">help</span> to list commands. Try <span class="text-amber">db list</span> or <span class="text-amber">db load njmc</span>.
+    </div>
+
+    <div id="output-stream"></div>
+
+    <div class="terminal-input-row">
+      <span class="prompt-user">auditor@dlfa</span><span class="prompt-sep">:</span><span class="prompt-path">~</span><span class="prompt-char">$</span>
+      <input type="text" id="cli-input" autofocus autocomplete="off" spellcheck="false" />
+    </div>
+  </div>
+</div>
+
+<div id="print-sheet" class="print-only"></div>
+
+<script src="{{ "js/audit-db.js" | relURL }}"></script>
+<script src="{{ "js/terminal-app.js" | relURL }}"></script>
+{{ end }}
