@@ -1,7 +1,6 @@
-﻿baseURL = "https://phuchungbhutia.github.io/audit-sikkim/"
+baseURL = "https://phuchungbhutia.github.io/audit-sikkim/"
 languageCode = "en-us"
 title = "audit-sikkim ~ terminal"
-theme = "m10c"
 
 [menu]
   [[menu.main]]
