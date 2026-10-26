@@ -1,20 +1,10 @@
 baseURL = "https://phuchungbhutia.github.io/audit-sikkim/"
 languageCode = "en-us"
-title = "audit-sikkim ~ terminal"
+title = "Audit Sikkim Portal"
 
 [menu]
   [[menu.main]]
     identifier = "generator"
-    name = "terminal-app"
+    name = "Terminal App"
     url = "/generator/"
     weight = 1
-  [[menu.main]]
-    identifier = "docs"
-    name = "cag-framework"
-    url = "/"
-    weight = 2
-
-[params]
-  author = "Internal Audit & Local Fund Audit Division"
-  description = "ULB Audit Assessment & Quality Certification Portal"
-  menu_item_separator = " - "
